@@ -1,0 +1,52 @@
+{{template "header.html" .}}
+<div class="box">
+    <div class="columns">
+        <div class="column is-one-third">
+            <figure class="image is-square">
+                <img src="cover.jpg">
+            </figure>
+        </div>
+        <div class="column">
+            <h1 class="title">{{.Podcast.Title}}</h1>
+            <p class="content">{{.Podcast.Description}}</p>
+            <div class="buttons">
+                {{if .Podcast.WebsiteUrl}}<a class="button is-primary" href="{{.Podcast.WebsiteUrl}}" target="_blank">Webseite</a>{{end}}
+                {{if .Podcast.WebsiteUrl2}}<a class="button is-primary" href="{{.Podcast.WebsiteUrl2}}" target="_blank">Webseite 2</a>{{end}}
+                <a class="button is-primary" href="{{.Podcast.FeedUrl}}" target="_blank">Feed</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="notification is-info">
+    Hinweis: alle Podcast-Daten (Cover-Bilder, Beschreibungen, Episoden-Texte, usw.) werden automatisch aus den von den jeweiligen Podcast-Betreibern öffentlich zur Verfügung gestellten Podcasts-Feeds generiert. Das Urheberrecht verbleibt natürlich bei den Betreibern der Podcasts.
+</div>
+
+<div class="columns is-multiline">
+    {{range .Podcast.Episodes}}
+    <div class="column is-full">
+        <div class="card">
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-left">
+                        <figure class="image is-48x48">
+                            <img src="cover.jpg">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <p class="title is-4">{{.Title}}</p>
+                        <p class="subtitle is-6">{{.PublishedStr}} - {{.Duration}}</p>
+                    </div>
+                </div>
+                <div class="content">
+                    {{.Description}}
+                </div>
+            </div>
+            <footer class="card-footer">
+                <a class="card-footer-item" href="{{.Link}}" target="_blank">Zur Episode</a>
+            </footer>
+        </div>
+    </div>
+    {{end}}
+</div>
+{{template "footer.html" .}}

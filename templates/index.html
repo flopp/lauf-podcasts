@@ -1,0 +1,41 @@
+{{template "header.html" .}}
+
+<div class="notification is-info">
+    Hinweis: alle Podcast-Daten (Cover-Bilder, Beschreibungen, Episoden-Texte, usw.) werden automatisch aus den von den jeweiligen Podcast-Betreibern öffentlich zur Verfügung gestellten Podcasts-Feeds generiert. Das Urheberrecht verbleibt natürlich bei den Betreibern der Podcasts.
+</div>
+
+<div class="columns is-multiline">
+    {{range .Podcasts}}
+    <div class="column is-one-third">
+        <div class="card">
+            <a href="/{{.Slug}}/">
+                <div class="card-image">
+                    <figure class="image is-square">
+                        <img src="/{{.Slug}}/cover.jpg">
+                    </figure>
+                </div>
+            </a>
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-content">
+                        <p class="title is-4">{{.Title}}</p>
+                        <p class="subtitle is-6">Update: {{.LatestPublishStr}}</p>
+                    </div>
+                </div>
+                <div class="content">
+                    Letzte Episode: 
+                    {{if .LatestEpisode}}
+                        <a href="{{.LatestEpisode.Link}}" target="_blank">{{.LatestEpisode.Title}}</a>
+                    {{else}}
+                        keine
+                    {{end}}
+                </div>
+            </div>
+            <footer class="card-footer">
+                <a href="/{{.Slug}}/" class="card-footer-item">Details</a>
+            </footer>
+        </div>
+    </div>
+    {{end}}
+</div>
+{{template "footer.html" .}}
